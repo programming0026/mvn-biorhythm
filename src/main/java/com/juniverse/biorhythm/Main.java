@@ -9,12 +9,15 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+import java.util.logging.Logger;
 /**
  * Pide la fecha de nacimiento y muestra una gráfica (JFreeChart) con los biorritmos de los últimos 30 días.
  *
  * @author linux
  */
 public class Main extends JFrame {
+    private static final Logger LOGGER = AppLogger.get(Main.class);
+
 
     /**
      * Crea la ventana con la gráfica.
@@ -57,7 +60,7 @@ public class Main extends JFrame {
             return;
         }
 
-        System.out.println("Dias Vividos: " + days);
+        LOGGER.info("Dias Vividos: " + days);
 
         javax.swing.SwingUtilities.invokeLater(() -> {
             Main example = new Main("Gráfica de Biorritmo", days);
@@ -77,7 +80,7 @@ public class Main extends JFrame {
         try {
             return Integer.parseInt(JOptionPane.showInputDialog(message));
         } catch (NumberFormatException ex) {
-            System.err.println("Msg: " + ex.getMessage());
+            LOGGER.severe("Msg: " + ex.getMessage());
             return -1;
         }
     }

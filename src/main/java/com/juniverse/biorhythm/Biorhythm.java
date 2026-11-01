@@ -3,6 +3,7 @@ package com.juniverse.biorhythm;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+import java.util.logging.Logger;
 /**
  * Cálculo de los tres ciclos del biorritmo: físico (23 días), emocional (28 días) e intelectual (33 días).
  * Cada ciclo es una senoidal que vale 0 el día del nacimiento.
@@ -10,6 +11,8 @@ import java.time.temporal.ChronoUnit;
  * @author linux
  */
 public final class Biorhythm {
+    private static final Logger LOGGER = AppLogger.get(Biorhythm.class);
+
     
     /** Clase de utilidades: no se instancia. */
     private Biorhythm() {
@@ -29,7 +32,7 @@ public final class Biorhythm {
             long days = ChronoUnit.DAYS.between(birthDate, currentDate);
             return days < 0 ? -1 : days; // una fecha futura no es válida
         } catch (Exception ex) {
-            System.err.println(ex.getMessage());
+            LOGGER.severe(ex.getMessage());
             return -1;
         }        
     }
